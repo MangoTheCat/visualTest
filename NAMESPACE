@@ -1,0 +1,8 @@
+export(compareWithFingerprint)
+export(getFingerprint)
+export(isSimilar)
+export(rgb2Value)
+export(showFingerprint)
+import(bmp)
+import(jpeg)
+import(png)

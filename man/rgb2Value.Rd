@@ -1,0 +1,21 @@
+\name{rgb2Value}
+\alias{rgb2Value}
+\title{convert RGB array to value}
+\usage{
+rgb2Value(array)
+}
+\arguments{
+  \item{array}{array with three dimensions length N, M and
+  3}
+}
+\value{
+matrix with nrow N and ncol M
+}
+\description{
+convert RGB array to value
+}
+\examples{
+rgba <- array(c(0:2, rep((1:8), times = 3)) / 10, dim = c(3, 3, 3))
+   rgb2Value(array = rgba)
+}
+

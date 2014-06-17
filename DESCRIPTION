@@ -1,0 +1,13 @@
+Package: visualTest
+Type: Package
+Title: Perform fuzzy image matching
+Version: 0.1
+Date: 2014-04-03
+Author: ccampbell
+Maintainer: ccampbell <ccampbell@mango-solutions.com>
+Description: Extract and match characteristic signal in plot files
+License: GPL-2
+Depends:
+    png,
+    jpeg,
+    bmp

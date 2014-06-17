@@ -1,0 +1,62 @@
+\name{isSimilar}
+\alias{isSimilar}
+\title{Is this Graphic a Match to this Fingerprint?}
+\usage{
+isSimilar(file, fingerprint, threshold = 0.001, exact = FALSE, ...)
+}
+\arguments{
+  \item{file}{single character naming PNG or JPG file from
+  which to get fingerprint}
+
+  \item{fingerprint}{numeric vector identifying file
+  expected, or a single character naming a file to
+  fingerprint}
+
+  \item{threshold}{single numeric similarity parameter
+  (default 1e-3)}
+
+  \item{exact}{single logical should fingerprints match
+  exactly (default \code{FALSE})}
+
+  \item{\dots}{additional arguments}
+}
+\description{
+A function to check similarity between plots. By default,
+fingerprint comparison is very fuzzy, and the fuzziness can
+be controlled by argument threshold (see
+\code{\link{compareWithFingerprint}}). Fingerprint exact
+matching can be selected with argument exact. Note that
+similar looking images may have the same fingerprint (see
+\code{\link{getFingerprint}}).
+}
+\examples{
+rdata <- matrix(rnorm(200), ncol = 2)
+    png("test1.png")
+    plot(rdata)
+    dev.off()
+    fing1 <- getFingerprint(file = "test1.png")
+    rdata[2, 2] <- 0.1
+    png("test2.png")
+    plot(rdata)
+    dev.off()
+    isSimilar(file = "test2.png", fingerprint = fing1)
+    isSimilar(file = "test2.png", fingerprint = fing1, threshold = 0.05)
+    png("test3.png")
+    plot(rdata, col = 3)
+    dev.off()
+    isSimilar(file = "test3.png", fingerprint = fing1)
+    isSimilar(file = "test3.png", fingerprint = fing1, threshold = 0.05)
+    rdata2 <- matrix(rnorm(200), ncol = 2)
+    png("test4.png")
+    plot(rdata2)
+    dev.off()
+    isSimilar(file = "test4.png", fingerprint = fing1)
+    isSimilar(file = "test4.png", fingerprint = fing1, threshold = 5)
+    png("test5.png")
+    hist(rdata2)
+    dev.off()
+    isSimilar(file = "test5.png", fingerprint = fing1)
+    isSimilar(file = "test5.png", fingerprint = fing1, threshold = 5e6)
+    unlink("test1.png", "test2.png", "test3.png", "test4.png", "test5.png")
+}
+
