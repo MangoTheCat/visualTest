@@ -7,20 +7,19 @@ The threshold argument allows the level of fuzziness to be compared.
 how to use this code
 --------
 
-To install this package you will need:
-* R
-* Rtools
+```R
+# install devtools for devtools::install_github
+install.packages("devtools")
 
-Note that you must manually update your environmental variable PATH to include these utilities.
+# install visualTest
+install_github("MangoTheCat/visualTest")
+```
 
-This package includes comments in **roxygen2** format. 
-From R (and when located one level above folder visualTest) run the command 
-`roxygenise("visualTest")` to build the help files. 
-To build the package on Windows use the command `R CMD INSTALL --build visualTest` from the command window.
 This package also includes tests in **testthat** format. From R run the call `test_package("visualTest")`.
    
 
 ```R
+require(visualTest)
 set.seed(4354353)
 rdata <- matrix(rnorm(200), ncol = 2)
 png("stest-01.png", height = 400, width = 400, res = 72)
