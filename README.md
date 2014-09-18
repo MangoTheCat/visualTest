@@ -10,7 +10,7 @@ how to use this code
 ```R
 # install devtools for devtools::install_github
 install.packages("devtools")
-
+require(devtools)
 # install visualTest
 install_github("MangoTheCat/visualTest")
 ```
