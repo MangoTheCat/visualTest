@@ -1,14 +1,4 @@
 
-#' Use \pkg{visualTest} to perform fuzzy image matching
-#' 
-#' @author Chris Campbell \email{ccampbell@@mango-solutions.com}
-#' @name visualTest-package
-#' @aliases visualTest
-#' @docType package
-#' @title Extract and match characteristic signal in graphs
-NULL
-
-
 #' A function to check similarity between plots. By default, fingerprint comparison is very fuzzy, 
 #' and the fuzziness can be controlled by argument threshold (see \code{\link{compareWithFingerprint}}).
 #' Fingerprint exact matching can be selected with argument exact. Note that similar looking images may 
