@@ -67,9 +67,9 @@ readBMP <- function(source) {
 #' @return matrix with nrow N and ncol M
 #'
 #' @keywords internal
-#' @examples
-#' rgba <- array(c(0:2, rep((1:8), times = 3)) / 10, dim = c(3, 3, 3))
-#' rgb2Value(array = rgba)
+## @examples
+## rgba <- array(c(0:2, rep((1:8), times = 3)) / 10, dim = c(3, 3, 3))
+## rgb2Value(array = rgba)
 
 rgb2Value <- function(array) {
 

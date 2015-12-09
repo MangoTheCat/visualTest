@@ -15,9 +15,5 @@ matrix with nrow N and ncol M
 \description{
 Convert RGB array to value
 }
-\examples{
-rgba <- array(c(0:2, rep((1:8), times = 3)) / 10, dim = c(3, 3, 3))
-rgb2Value(array = rgba)
-}
 \keyword{internal}
 
