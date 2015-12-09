@@ -9,6 +9,8 @@ Description: Extract and match fingerprints, characteristic signal
     when comparing the target and the tested images.
 License: GPL-2
 Imports:
+    tools
+Suggests:
     png,
     jpeg,
     bmp

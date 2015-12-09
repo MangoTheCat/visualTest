@@ -6,8 +6,6 @@
 #' @param ... additional arguments
 #'
 #' @export
-#' @importFrom png readPNG
-#' @importFrom jpeg readJPEG
 #' @importFrom tools file_ext
 #'
 #' @examples
@@ -21,10 +19,10 @@ getFingerprint <- function(file, ...) {
   if (length(file) > 1) warning("only first value of file will be used")
 
   readers <- list(
-    png  = readPNG,
-    jpg  = readJPEG,
-    jpeg = readJPEG,
-    bmp  = readBMP
+    png  = pkg("png",  "readPNG")  %||% pkg_reader_error("png"),
+    jpg  = pkg("jpeg", "readJPEG") %||% pkg_reader_error("jpeg"),
+    jpeg = pkg("jpeg", "readJPEG") %||% pkg_reader_error("jpeg"),
+    bmp  = createBMP(pkg("bmp", "read.bmp")) %||% pkg_reader_error("bmp")
   )
 
   file <- file[1]
@@ -45,19 +43,42 @@ getFingerprint <- function(file, ...) {
   diff(which(zeros))
 }
 
-#' @importFrom bmp read.bmp
+## Get a function from a package, or NULL if the package is not
+## available
 
-readBMP <- function(source) {
-  img <- read.bmp(f = source)
-  pow <- floor(max(img)^0.5)
-  img <- img / 2^pow
-  dm <- dim(img)
+pkg <- function(package, func) {
+  if (! requireNamespace(package, quietly = TRUE)) return(NULL)
+  getExportedValue(package, func)
+}
 
-  if (length(dm) < 2 && length(dm) > 3) {
-    stop("unexpected dimensions of source file")
+## Create a reader that will just signal an error message
+
+pkg_reader_error <- function(package) {
+  function(...) {
+    stop("the ", package, " package is needed to read this file")
   }
+}
 
-  array(data = rep(c(img), times = 3), dim = c(nrow(img), ncol(img), 3))
+## From the read.bmp function, create a function that reads a BMP
+## in the same format as png::readPNG and jpeg::readJPEG.
+## If read.bmp is NULL, then return NULL
+
+createBMP <- function(read.bmp) {
+
+  if (is.null(read.bmp)) return(NULL)
+
+  function(source) {
+    img <- read.bmp(f = source)
+    pow <- floor(max(img)^0.5)
+    img <- img / 2^pow
+    dm <- dim(img)
+
+    if (length(dm) < 2 && length(dm) > 3) {
+      stop("unexpected dimensions of source file")
+    }
+
+    array(data = rep(c(img), times = 3), dim = c(nrow(img), ncol(img), 3))
+  }
 }
 
 
