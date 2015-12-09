@@ -1,11 +1,18 @@
-visualTest
-==========
 
-An [R package](http://www.r-project.org/) to perform fuzzy comparison of graphical files.
-The threshold argument allows the level of fuzziness to be compared.
+# visualTest
 
-how to use this code
---------
+[![Linux Build Status](https://travis-ci.org/MangoTheCat/visualTest.svg?branch=master)](https://travis-ci.org/MangoTheCat/visualTest)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/MangoTheCat/visualTest?svg=true)](https://ci.appveyor.com/project/gaborcsardi/visualTest)
+[![](http://www.r-pkg.org/badges/version/visualTest)](http://www.r-pkg.org/pkg/visualTest)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/visualTest)](http://www.r-pkg.org/pkg/visualTest)
+[![Coverage Status](https://img.shields.io/codecov/c/github/MangoTheCat/visualTest/master.svg)](https://codecov.io/github/MangoTheCat/visualTest?branch=master)
+
+An [R package](http://www.r-project.org/) to perform fuzzy comparison
+of graphical files. The threshold argument allows the level of fuzziness
+to be compared.
+
+## Usage
+
 
 ```R
 # install devtools for devtools::install_github
@@ -14,9 +21,6 @@ require(devtools)
 # install visualTest
 install_github("MangoTheCat/visualTest")
 ```
-
-This package also includes tests in **testthat** format. From R run the call `test_package("visualTest")`.
-   
 
 ```R
 require(visualTest)
@@ -57,3 +61,6 @@ isSimilar(file = "stest-05.png", fingerprint = finger01, threshold = 17)
 
 ![random normal data histogram](https://raw.githubusercontent.com/MangoTheCat/visualTest/master/inst/compare/stest-05.png "hist(rdata)")
  
+## License
+
+GPL 2 © [Mango Solutions](https://github.com/mangothecat).
