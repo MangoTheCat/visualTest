@@ -20,28 +20,19 @@ getFingerprint <- function(file, ...) {
   if (missing(file) || length(file) == 0) stop("file is missing")
   if (length(file) > 1) warning("only first value of file will be used")
 
-  file <- file[1]
-  type <- "unknown"
-
-  if (grepl(pattern = "*\\.[Pp][Nn][Gg]$", x = file)) {
-    type <- "png"
-  }
-  if (grepl(pattern = "*\\.[Jj][Pp]([EeGg]|[Gg])$", x = file)) {
-    type <- "jpg"
-  }
-  if (grepl(pattern = "*\\.[Bb][Mm][Pp]$", x = file)) {
-    type <- "bmp"
-  }
-
-  read <- switch(
-    type,
-    "png" = readPNG,
-    "jpg" = readJPEG,
-    "bmp" = readBMP,
-    stop("unsupported file type")
+  readers <- list(
+    png  = readPNG,
+    jpg  = readJPEG,
+    jpeg = readJPEG,
+    bmp  = readBMP
   )
 
-  imageArray <- read(file)
+  file <- file[1]
+  ext <- file_ext(file)
+  type <- tolower(ext)
+  reader <- readers[[type]] %||% stop("unsupported file type: .", ext)
+
+  imageArray <- reader(file)
   imageMat <- rgb2Value(imageArray)
 
   ## perform fast fourier transform
