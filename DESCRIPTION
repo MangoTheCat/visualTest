@@ -11,3 +11,4 @@ Depends:
     png,
     jpeg,
     bmp
+RoxygenNote: 5.0.1
