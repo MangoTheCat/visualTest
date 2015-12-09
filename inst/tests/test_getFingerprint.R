@@ -1,8 +1,3 @@
-# Date of last change: 2014-05-01
-# Last changed by: ccampbell
-# 
-# Original author: ccampbell
-###############################################################################
 
 context("work out the image fingerprint")
 

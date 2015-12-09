@@ -1,8 +1,8 @@
 Package: visualTest
 Title: Perform fuzzy image matching
 Version: 1.0.0
-Author: ccampbell
-Maintainer: ccampbell <ccampbell@mango-solutions.com>
+Author: Chris Campbell
+Maintainer: Chris Campbell <ccampbell@mango-solutions.com>
 Description: Extract and match fingerprints, characteristic signal
     in plot files. It can be used for testing packages or other R code
     with graphical output. It is possible to set the level of fuzzyness

@@ -1,8 +1,3 @@
-# Date of last change: 2014-04-03
-# Last changed by: ccampbell
-# 
-# Original author: ccampbell
-###############################################################################
 
 context("is this image similar?")
 
