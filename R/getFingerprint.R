@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' getFingerprint(
-#'   file.path(system.file(package = "visualTest"), "compare", "stest-00.jpg")
+#'   system.file(package = "visualTest", "compare", "stest-00.jpg")
 #' )
 
 getFingerprint <- function(file, ...) {

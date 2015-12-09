@@ -47,7 +47,7 @@ test_that("getFingerprint", {
   )
 
   for (case in names(cases)) {
-    file <- file.path(system.file(package = "visualTest"), "compare", case)
+    file <- system.file(package = "visualTest", "compare", case)
     expect_equal(
       as.integer(cases[[case]]),
       getFingerprint(file = file),
