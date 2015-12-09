@@ -6,7 +6,6 @@
 #' @aliases visualTest
 #' @docType package
 #' @title Extract and match characteristic signal in graphs
-#' @import png jpeg bmp
 NULL
 
 

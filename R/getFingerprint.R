@@ -5,6 +5,9 @@
 #'   from which to get fingerprint
 #' @param ... additional arguments
 #' @export
+#' @importFrom png readPNG
+#' @importFrom jpeg readJPEG
+#' @importFrom bmp read.bmp
 #' @examples
 #' getFingerprint(
 #'   file.path(system.file(package = "visualTest"), "compare", "stest-00.jpg")

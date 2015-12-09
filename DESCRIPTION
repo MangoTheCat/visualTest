@@ -8,7 +8,7 @@ Description: Extract and match fingerprints, characteristic signal
     with graphical output. It is possible to set the level of fuzzyness
     when comparing the target and the tested images.
 License: GPL-2
-Depends:
+Imports:
     png,
     jpeg,
     bmp
