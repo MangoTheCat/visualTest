@@ -2,7 +2,7 @@
 % Please edit documentation in R/isSimilar.R
 \name{compareWithFingerprint}
 \alias{compareWithFingerprint}
-\title{compare a test fingerprint with a known fingerprint}
+\title{Compare a test fingerprint with a known fingerprint}
 \usage{
 compareWithFingerprint(test, fingerprint, threshold = 0.001, exact = FALSE)
 }
@@ -13,16 +13,24 @@ compareWithFingerprint(test, fingerprint, threshold = 0.001, exact = FALSE)
 
 \item{threshold}{single numeric similarity parameter (default 1e-3)}
 
-\item{exact}{single logical should fingerprints match exactly (default \code{FALSE})}
+\item{exact}{single logical should fingerprints match exactly (default
+\code{FALSE})}
 }
 \value{
 single logical
 }
+\description{
+Compare a test fingerprint with a known fingerprint
+}
 \examples{
-    compareWithFingerprint(test = 1:3, fingerprint = 1:3)
-    compareWithFingerprint(test = 1:3, fingerprint = 1:4)
-    compareWithFingerprint(test = 1:3, fingerprint = 1:3 + 1e-3)
-    compareWithFingerprint(test = 1:3, fingerprint = c(1, 2, 3.1))
-    compareWithFingerprint(test = 1:3, fingerprint = c(1, 2, 3.1), exact = TRUE)
+compareWithFingerprint(test = 1:3, fingerprint = 1:3)
+compareWithFingerprint(test = 1:3, fingerprint = 1:4)
+compareWithFingerprint(test = 1:3, fingerprint = 1:3 + 1e-3)
+compareWithFingerprint(test = 1:3, fingerprint = c(1, 2, 3.1))
+compareWithFingerprint(
+  test = 1:3,
+  fingerprint = c(1, 2, 3.1),
+  exact = TRUE
+)
 }
 

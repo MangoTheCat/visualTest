@@ -7,21 +7,26 @@
 isSimilar(file, fingerprint, threshold = 0.001, exact = FALSE, ...)
 }
 \arguments{
-\item{file}{single character naming PNG or JPG file from which to get fingerprint}
+\item{file}{single character naming PNG or JPG file from which to get
+fingerprint}
 
-\item{fingerprint}{numeric vector identifying file expected, or a single character naming a file to fingerprint}
+\item{fingerprint}{numeric vector identifying file expected, or a single
+character naming a file to fingerprint}
 
 \item{threshold}{single numeric similarity parameter (default 1e-3)}
 
-\item{exact}{single logical should fingerprints match exactly (default \code{FALSE})}
+\item{exact}{single logical should fingerprints match exactly (default
+\code{FALSE})}
 
 \item{...}{additional arguments}
 }
 \description{
-A function to check similarity between plots. By default, fingerprint comparison is very fuzzy, 
-and the fuzziness can be controlled by argument threshold (see \code{\link{compareWithFingerprint}}).
-Fingerprint exact matching can be selected with argument exact. Note that similar looking images may 
-have the same fingerprint (see \code{\link{getFingerprint}}).
+A function to check similarity between plots. By default, fingerprint
+comparison is very fuzzy, and the fuzziness can be controlled by
+argument threshold (see \code{\link{compareWithFingerprint}}).
+Fingerprint exact matching can be selected with argument exact. Note
+that similar looking images may have the same fingerprint (see
+\code{\link{getFingerprint}}).
 }
 \examples{
 rdata <- matrix(rnorm(200), ncol = 2)

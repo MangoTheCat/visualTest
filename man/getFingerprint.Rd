@@ -7,7 +7,7 @@
 getFingerprint(file, ...)
 }
 \arguments{
-\item{file}{single character naming PNG or JPG file
+\item{file}{single character naming PNG, JPG or BMP file
 from which to get fingerprint}
 
 \item{...}{additional arguments}

@@ -20,7 +20,7 @@ Show Fingerprint(s)
 sf <- system.file(package = "visualTest")
 eg <- "VR-616_plot-lm00.jpg"
 showFingerprint(
-  file.path(sf, "compare", "windows", eg), 
+  file.path(sf, "compare", "windows", eg),
   file.path(sf, "compare", "unix", eg)
 )
 }

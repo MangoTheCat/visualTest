@@ -15,12 +15,14 @@ isCross(x, len = 3)
 logical vector of length zero
 }
 \description{
-Find positions in a numeric vector where sign has changed on average for more than n elements
+Find positions in a numeric vector where sign has changed on average for
+more than n elements.
 }
 \examples{
-   x1 <- -7:8
-   visualTest:::isCross(x = x1)
-   x2 <- rep(-1:1, times = 6)
-   visualTest:::isCross(x = x2)
+x1 <- -7:8
+visualTest:::isCross(x = x1)
+x2 <- rep(-1:1, times = 6)
+visualTest:::isCross(x = x2)
 }
+\keyword{internal}
 
