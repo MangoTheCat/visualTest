@@ -31,40 +31,42 @@ that similar looking images may have the same fingerprint (see
 \examples{
 rdata <- matrix(rnorm(200), ncol = 2)
 
-png("test1.png")
+## To create the images in a temporary directory
+tmp <- function(path) file.path(tempdir(), path)
+
+png(tmp("test1.png"))
 plot(rdata)
 dev.off()
 
-fing1 <- getFingerprint(file = "test1.png")
+fing1 <- getFingerprint(file = tmp("test1.png"))
 rdata[2, 2] <- 0.1
-png("test2.png")
+png(tmp("test2.png"))
 plot(rdata)
 dev.off()
 
-isSimilar(file = "test2.png", fingerprint = fing1)
-isSimilar(file = "test2.png", fingerprint = fing1, threshold = 0.05)
+isSimilar(file = tmp("test2.png"), fingerprint = fing1)
+isSimilar(file = tmp("test2.png"), fingerprint = fing1, threshold = 0.05)
 
-png("test3.png")
+png(tmp("test3.png"))
 plot(rdata, col = 3)
 dev.off()
 
-isSimilar(file = "test3.png", fingerprint = fing1)
-isSimilar(file = "test3.png", fingerprint = fing1, threshold = 0.05)
+isSimilar(file = tmp("test3.png"), fingerprint = fing1)
+isSimilar(file = tmp("test3.png"), fingerprint = fing1, threshold = 0.05)
 
 rdata2 <- matrix(rnorm(200), ncol = 2)
-png("test4.png")
+png(tmp("test4.png"))
 plot(rdata2)
 dev.off()
 
-isSimilar(file = "test4.png", fingerprint = fing1)
-isSimilar(file = "test4.png", fingerprint = fing1, threshold = 5)
+isSimilar(file = tmp("test4.png"), fingerprint = fing1)
+isSimilar(file = tmp("test4.png"), fingerprint = fing1, threshold = 5)
 
-png("test5.png")
+png(tmp("test5.png"))
 hist(rdata2)
 dev.off()
 
-isSimilar(file = "test5.png", fingerprint = fing1)
-isSimilar(file = "test5.png", fingerprint = fing1, threshold = 5e6)
-unlink("test1.png", "test2.png", "test3.png", "test4.png", "test5.png")
+isSimilar(file = tmp("test5.png"), fingerprint = fing1)
+isSimilar(file = tmp("test5.png"), fingerprint = fing1, threshold = 5e6)
 }
 
