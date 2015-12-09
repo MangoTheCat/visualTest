@@ -1,3 +1,4 @@
 ^LICENSE$
-^appveyor.yml$
-^\.travis.yml$
+^appveyor\.yml$
+^\.travis\.yml$
+^README\.md$
