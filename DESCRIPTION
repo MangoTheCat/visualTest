@@ -13,5 +13,6 @@ Imports:
 Suggests:
     png,
     jpeg,
-    bmp
+    bmp,
+    testthat
 RoxygenNote: 5.0.1
