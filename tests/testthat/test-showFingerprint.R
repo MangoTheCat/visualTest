@@ -16,11 +16,7 @@ test_that("showFingerprint", {
   )
   dev.off()
 
-  expect_equal(
-    getFingerprint(tmp),
-    c(9, 4, 4, 4, 10, 4, 7, 7, 6, 9, 7, 4, 9, 9, 7,
-      4, 12, 3, 7, 10, 19, 10, 10, 19, 10, 16, 10, 3,
-      10, 16, 10, 19, 10, 10, 19, 10, 7, 3, 12, 4, 7,
-      9, 9, 4, 7, 9, 6, 7, 7, 4, 6, 8, 4, 4, 9, 4)
+  expect_true(
+    isSimilar(tmp, "show-test.png.gz")
   )
 })
