@@ -4,6 +4,8 @@
 #' @return list of fingerprint(s) invisibly.
 #'    As a side effect, a plot of fingerprints is created.
 #' @export
+#' @importFrom methods allNames
+#' @importFrom graphics plot lines
 #'
 #' @examples
 #' sf <- system.file(package = "visualTest")

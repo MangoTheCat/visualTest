@@ -98,6 +98,7 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
 #' @return single logical
 #'
 #' @export
+#' @importFrom stats fivenum
 #' @examples
 #' compareWithFingerprint(test = 1:3, fingerprint = 1:3)
 #' compareWithFingerprint(test = 1:3, fingerprint = 1:4)

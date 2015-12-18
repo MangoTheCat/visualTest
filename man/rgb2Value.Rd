@@ -4,10 +4,12 @@
 \alias{rgb2Value}
 \title{Convert RGB array to value}
 \usage{
-rgb2Value(array)
+rgb2Value(array, which = c("v", "h", "s"))
 }
 \arguments{
 \item{array}{array with three dimensions length N, M and 3}
+
+\item{which}{Which HSV component to use.}
 }
 \value{
 matrix with nrow N and ncol M

@@ -7,6 +7,7 @@
 #'
 #' @export
 #' @importFrom tools file_ext
+#' @importFrom stats mvfft
 #'
 #' @examples
 #' getFingerprint(
@@ -97,6 +98,7 @@ createBMP <- function(read.bmp) {
 #' @return matrix with nrow N and ncol M
 #'
 #' @keywords internal
+#' @importFrom grDevices rgb2hsv
 ## @examples
 ## rgba <- array(c(0:2, rep((1:8), times = 3)) / 10, dim = c(3, 3, 3))
 ## rgb2Value(array = rgba)
