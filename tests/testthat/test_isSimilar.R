@@ -37,7 +37,7 @@ test_that("isSimilar", {
     case$fingerprint <- fingerprint
 
     result <- do.call(isSimilar, case)
-    expect_equal(result, corr)
+    expect_equal(result, corr, info = case$file)
   }
 })
 
