@@ -2,7 +2,7 @@
 % Please edit documentation in R/showFingerprint.R
 \name{showFingerprint}
 \alias{showFingerprint}
-\title{Show Fingerprint(s)}
+\title{Plot some fingerprints against each other}
 \usage{
 showFingerprint(...)
 }
@@ -11,10 +11,9 @@ showFingerprint(...)
 }
 \value{
 list of fingerprint(s) invisibly.
-   As a side effect, a plot of fingerprints is created.
 }
 \description{
-Show Fingerprint(s)
+Plot some fingerprints against each other
 }
 \examples{
 sf <- system.file(package = "visualTest")

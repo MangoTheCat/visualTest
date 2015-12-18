@@ -1,8 +1,9 @@
 
-#' Show Fingerprint(s)
+#' Plot some fingerprints against each other
+#'
 #' @param ... files to test
 #' @return list of fingerprint(s) invisibly.
-#'    As a side effect, a plot of fingerprints is created.
+#'
 #' @export
 #' @importFrom methods allNames
 #' @importFrom graphics plot lines
@@ -17,27 +18,16 @@
 
 showFingerprint <- function(...) {
 
-  mcall <- match.call()
-  lcall <- as.list(mcall)
+  files <- list(...)
+  if (length(files) == 0) stop("No files specified")
 
-  nf <- sum(allNames(lcall) == "") - 1
-  fingers <- vector(mode = "list", length = nf)
+  fingers <- lapply(files, getFingerprint)
 
-  if (nf > 0) {
-    lenf <-  vector(mode = "numeric", length = nf)
-    for (ff in seq_along(fingers)) {
-      fingers[[ff]] <- try(getFingerprint(eval(mcall[[ff + 1]])))
-      lenf[ff] <- length(fingers[[ff]])
-    }
+  rng <- range(unlist(fingers), na.rm = TRUE)
+  lenf <- vapply(fingers, length, 1L)
 
-    rng <- range(sapply(fingers, range, na.rm = TRUE), na.rm = TRUE)
-    if (is.numeric(rng) && all(!is.na(rng)) && length(rng) == 2) {
-      plot(c(1, max(lenf)), rng, type = "n", xlab = "", ylab = "")
-      for (ff in seq_along(fingers)) {
-        if (!is.null(fingers[[ff]])) {
-          lines(seq_along(fingers[[ff]]), fingers[[ff]], col = ff, lty = ff) }
-      }
-    }
-  }
+  plot(c(1, max(lenf)), rng, type = "n", xlab = "", ylab = "")
+  for (ff in seq_along(fingers)) lines(fingers[[ff]], col = ff, lty = ff)
+
   invisible(fingers)
 }
