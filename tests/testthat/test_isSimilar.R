@@ -67,7 +67,7 @@ test_that("is cross-platform difference ignored?", {
     "VR-616_plot-lm04.png" = 11,
     "VR-616_plot-lm05.png" = 3,
     "VR-616_plot-lm06.png" = 4,
-    "VR-616_plot-lm07.png" = 3,
+    "VR-616_plot-lm07.png" = 4,
     "VR-616_plot-lm08.png" = 3,
     "VR-616_plot-lm09.bmp" = 3
   )
@@ -76,7 +76,10 @@ test_that("is cross-platform difference ignored?", {
     f1 <- system.file(package = packageName(), "compare", "unix", f)
     f2 <- system.file(package = packageName(), "compare", "windows", f)
     t <- thresholds[f]
-    expect_true(isSimilar(file = f1, fingerprint = f2, threshold = t))
+    expect_true(
+      isSimilar(file = f1, fingerprint = f2, threshold = t),
+      info = f
+    )
   }
 
 })

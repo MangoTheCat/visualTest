@@ -33,8 +33,16 @@ getFingerprint <- function(file, ...) {
   imageArray <- reader(file)
   imageMat <- rgb2Value(imageArray)
 
+  ## Alternative implementation for some images
+  if (abs(min(imageMat) - max(imageMat)) < 1e-10) {
+    imageMat <- rgb2Value2(imageArray)
+  }
+
   ## perform fast fourier transform
   ftImage <- mvfft(imageMat)
+
+  ## get rid of values close to zero
+  ftImage <- zapsmall(ftImage)
 
   ## squash the signal into 1D
   sumImage <- apply(Im(ftImage), MARGIN = 1, sum)
@@ -85,6 +93,7 @@ createBMP <- function(read.bmp) {
 #' Convert RGB array to value
 #'
 #' @param array array with three dimensions length N, M and 3
+#' @param which Which HSV component to use.
 #' @return matrix with nrow N and ncol M
 #'
 #' @keywords internal
@@ -92,12 +101,15 @@ createBMP <- function(read.bmp) {
 ## rgba <- array(c(0:2, rep((1:8), times = 3)) / 10, dim = c(3, 3, 3))
 ## rgb2Value(array = rgba)
 
-rgb2Value <- function(array) {
+rgb2Value <- function(array, which = c("v", "h", "s")) {
 
   if (!is.array(array)) stop("array must be an array")
   dmArr <- dim(array)
   if (length(dmArr) != 3) stop("array dimensions should be N, M, 3")
   if (dmArr[3] != 3) warning("unsupported number of channels, 3 expected")
+
+  which <- match.arg(which)
+  which <- c("h" = 1, "s" = 2, "v" = 3)[which]
 
   N <- dmArr[1]
   M <- dmArr[2]
@@ -109,11 +121,19 @@ rgb2Value <- function(array) {
     byrow = TRUE
   )
   hsvMat <- rgb2hsv(r = rgbMat)
-  val <- matrix(hsvMat[3, ], nrow = N, ncol = M, byrow = FALSE)
+  val <- matrix(hsvMat[which, ], nrow = N, ncol = M, byrow = FALSE)
 
   val
 }
 
+rgb2Value2 <- function(array) {
+  if (!is.array(array)) stop("array must be an array")
+  dmArr <- dim(array)
+  if (length(dmArr) != 3) stop("array dimensions should be N, M, 3")
+  if (dmArr[3] != 3) warning("unsupported number of channels, 3 expected")
+
+  array[,,1] * 0.299 + array[,,2] * 587 + array[,,3] * 0.114
+}
 
 #' Find Zero Crossing Points
 #'
