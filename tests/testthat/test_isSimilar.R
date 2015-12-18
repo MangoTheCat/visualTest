@@ -9,19 +9,19 @@ test_that("isSimilar", {
                  3, 3, 3, 4, 8, 9, 3, 6, 24, 3, 6, 23, 26, 27, 24, 24)
 
   cases <- list(
-    list(file = "stest-00.jpg", correct = TRUE, threshold = 0.5),
-    list(file = "stest-01.png", correct = TRUE, threshold = 0),
-    list(file = "stest-01.png", correct = TRUE, exact = TRUE),
-    list(file = "stest-02.png", correct = FALSE),
-    list(file = "stest-02.png", correct = TRUE, threshold = 5),
-    list(file = "stest-03.png", correct = FALSE, exact = TRUE),
-    list(file = "stest-03.png", correct = TRUE),
-    list(file = "stest-04.png", correct = FALSE),
-    list(file = "stest-04.png", correct = TRUE, threshold = 4e3),
-    list(file = "stest-05.png", correct = FALSE),
-    list(file = "stest-05.png", correct = TRUE, threshold = 17),
-    list(file = "stest-06.png", correct = FALSE, threshold = 5),
-    list(file = "stest-06.png", correct = TRUE, threshold = 16)
+    list(file = "stest-00.jpg.gz", correct = TRUE, threshold = 0.5),
+    list(file = "stest-01.png.gz", correct = TRUE, threshold = 0),
+    list(file = "stest-01.png.gz", correct = TRUE, exact = TRUE),
+    list(file = "stest-02.png.gz", correct = FALSE),
+    list(file = "stest-02.png.gz", correct = TRUE, threshold = 5),
+    list(file = "stest-03.png.gz", correct = FALSE, exact = TRUE),
+    list(file = "stest-03.png.gz", correct = TRUE),
+    list(file = "stest-04.png.gz", correct = FALSE),
+    list(file = "stest-04.png.gz", correct = TRUE, threshold = 4e3),
+    list(file = "stest-05.png.gz", correct = FALSE),
+    list(file = "stest-05.png.gz", correct = TRUE, threshold = 17),
+    list(file = "stest-06.png.gz", correct = FALSE, threshold = 5),
+    list(file = "stest-06.png.gz", correct = TRUE, threshold = 16)
   )
 
   for (case in cases) {
@@ -59,16 +59,16 @@ test_that("is cross-platform difference ignored?", {
   )
 
   thresholds <- c(
-    "VR-616_plot-lm00.jpg" = 3,
-    "VR-616_plot-lm01.jpg" = 9,
-    "VR-616_plot-lm02.jpg" = 3,
-    "VR-616_plot-lm03.png" = 10,
-    "VR-616_plot-lm04.png" = 11,
-    "VR-616_plot-lm05.png" = 3,
-    "VR-616_plot-lm06.png" = 4,
-    "VR-616_plot-lm07.png" = 4,
-    "VR-616_plot-lm08.png" = 3,
-    "VR-616_plot-lm09.bmp" = 3
+    "VR-616_plot-lm00.jpg.gz" = 3,
+    "VR-616_plot-lm01.jpg.gz" = 9,
+    "VR-616_plot-lm02.jpg.gz" = 3,
+    "VR-616_plot-lm03.png.gz" = 10,
+    "VR-616_plot-lm04.png.gz" = 11,
+    "VR-616_plot-lm05.png.gz" = 3,
+    "VR-616_plot-lm06.png.gz" = 4,
+    "VR-616_plot-lm07.png.gz" = 4,
+    "VR-616_plot-lm08.png.gz" = 3,
+    "VR-616_plot-lm09.bmp.gz" = 3
   )
 
   for (f in files) {

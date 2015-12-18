@@ -18,7 +18,7 @@ Get Image Fingerprint
 }
 \examples{
 getFingerprint(
-  system.file(package = "visualTest", "compare", "stest-00.jpg")
+  system.file(package = "visualTest", "compare", "stest-00.jpg.gz")
 )
 }
 
