@@ -68,8 +68,8 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
   }
 
   if (is.numeric(fingerprint) ||
-      (is.character(fingerprint) || length(fingerprint) == 1)) {
-    if (is.character(fingerprint) || length(fingerprint) == 1) {
+      (is.character(fingerprint) && length(fingerprint) == 1)) {
+    if (is.character(fingerprint) && length(fingerprint) == 1) {
       fingerprint <- getFingerprint(file = fingerprint, ...)
     }
 
