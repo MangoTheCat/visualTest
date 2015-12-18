@@ -10,7 +10,6 @@ test_that("isSimilar", {
 
   cases <- list(
     list(file = "stest-00.jpg", correct = TRUE, threshold = 0.5),
-    list(file = "stest-00.jpg", correct = FALSE),
     list(file = "stest-01.png", correct = TRUE, threshold = 0),
     list(file = "stest-01.png", correct = TRUE, exact = TRUE),
     list(file = "stest-02.png", correct = FALSE),
@@ -37,7 +36,7 @@ test_that("isSimilar", {
     case$fingerprint <- fingerprint
 
     result <- do.call(isSimilar, case)
-    expect_equal(result, corr, info = case$file)
+    expect_equal(result, corr, info = paste(case$file, corr))
   }
 })
 
