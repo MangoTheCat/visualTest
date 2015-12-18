@@ -111,3 +111,35 @@ test_that("isCross", {
   a5[13] <- TRUE
   expect_equal(isCross(x = x5, len = 4), a5)
 })
+
+test_that("pkg_reader_error", {
+
+  with_mock(
+    `visualTest::pkg` = function(...) NULL,
+    expect_error(
+      pkg_reader_error("foobar")(),
+      "package is needed"
+    )
+  )
+})
+
+test_that("bmp reader checks dimension", {
+
+  expect_error(
+    createBMP(function(...) 42)("foobar"),
+    "unexpected dimensions"
+  )
+
+  expect_error(
+    createBMP(function(...) array(42, dim = c(1,1,1,1)))("foobar"),
+    "unexpected dimensions"
+  )
+})
+
+test_that("isCross signals warning", {
+
+  expect_warning(
+    isCross(1:2, len = 3),
+    "x is shorter than len"
+  )
+})

@@ -82,3 +82,31 @@ test_that("is cross-platform difference ignored?", {
   }
 
 })
+
+test_that("isSimilar error handling", {
+
+  expect_error(
+    isSimilar(fingerprint = 1:10),
+    "file is missing"
+  )
+
+  expect_error(
+    isSimilar(file = "foobar"),
+    "fingerprint is missing"
+  )
+
+  expect_error(
+    isSimilar(file = 1:10, fingerprint = 1:10),
+    "file should be a single character"
+  )
+
+  expect_error(
+    isSimilar(file = c("a", "b"), fingerprint = 1:10),
+    "file should be a single character"
+  )
+
+  expect_error(
+    isSimilar(file = "foo.png", fingerprint = FALSE),
+    "fingerprint should be a numeric vector or a single character"
+  )
+})
