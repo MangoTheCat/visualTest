@@ -17,6 +17,6 @@ test_that("showFingerprint", {
   dev.off()
 
   expect_true(
-    isSimilar(tmp, "show-test.png.gz", threshold = 3)
+    isSimilar(tmp, "show-test.png.gz", threshold = 7)
   )
 })
