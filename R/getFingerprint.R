@@ -4,7 +4,6 @@
 #' @param file single character naming PNG, JPG or BMP file
 #'   from which to get fingerprint. It can also be a gzip compressed
 #'   file with extension \code{.gz}.
-#' @param ... additional arguments
 #'
 #' @export
 #' @importFrom tools file_ext
@@ -15,7 +14,7 @@
 #'   system.file(package = "visualTest", "compare", "stest-00.jpg.gz")
 #' )
 
-getFingerprint <- function(file, ...) {
+getFingerprint <- function(file) {
 
   if (missing(file) || length(file) == 0) stop("file is missing")
   if (length(file) > 1) warning("only first value of file will be used")

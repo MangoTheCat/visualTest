@@ -4,14 +4,12 @@
 \alias{getFingerprint}
 \title{Get Image Fingerprint}
 \usage{
-getFingerprint(file, ...)
+getFingerprint(file)
 }
 \arguments{
 \item{file}{single character naming PNG, JPG or BMP file
 from which to get fingerprint. It can also be a gzip compressed
 file with extension \code{.gz}.}
-
-\item{...}{additional arguments}
 }
 \description{
 Get Image Fingerprint
