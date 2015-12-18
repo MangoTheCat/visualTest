@@ -39,11 +39,14 @@ getFingerprint <- function(file, ...) {
     imageMat <- rgb2Value2(imageArray)
   }
 
+  ## To avoid numeric errors
+  imageMat[] <- round(imageMat, digits = 8)
+
   ## perform fast fourier transform
   ftImage <- mvfft(imageMat)
 
-  ## get rid of values close to zero
-  ftImage <- zapsmall(ftImage)
+  ## To avoid numeric errors
+  ftImage[] <- round(ftImage, digits = 8)
 
   ## squash the signal into 1D
   sumImage <- apply(Im(ftImage), MARGIN = 1, sum)
