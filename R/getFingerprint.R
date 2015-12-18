@@ -113,7 +113,7 @@ createBMP <- function(read.bmp) {
     img <- img / 2^pow
     dm <- dim(img)
 
-    if (length(dm) < 2 && length(dm) > 3) {
+    if (length(dm) < 2 || length(dm) > 3) {
       stop("unexpected dimensions of source file")
     }
 
