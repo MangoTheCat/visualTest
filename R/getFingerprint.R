@@ -2,7 +2,8 @@
 #' Get Image Fingerprint
 #'
 #' @param file single character naming PNG, JPG or BMP file
-#'   from which to get fingerprint
+#'   from which to get fingerprint. It can also be a gzip compressed
+#'   file with extension \code{.gz}.
 #' @param ... additional arguments
 #'
 #' @export
@@ -19,19 +20,10 @@ getFingerprint <- function(file, ...) {
   if (missing(file) || length(file) == 0) stop("file is missing")
   if (length(file) > 1) warning("only first value of file will be used")
 
-  readers <- list(
-    png  = pkg("png",  "readPNG")  %||% pkg_reader_error("png"),
-    jpg  = pkg("jpeg", "readJPEG") %||% pkg_reader_error("jpeg"),
-    jpeg = pkg("jpeg", "readJPEG") %||% pkg_reader_error("jpeg"),
-    bmp  = createBMP(pkg("bmp", "read.bmp")) %||% pkg_reader_error("bmp")
-  )
+  reader <- get_reader(file)
 
-  file <- file[1]
-  ext <- file_ext(file)
-  type <- tolower(ext)
-  reader <- readers[[type]] %||% stop("unsupported file type: .", ext)
-
-  imageArray <- reader(file)
+  ## We drop the alpha channel, if present
+  imageArray <- reader(file)[ , , 1:3, drop = FALSE]
   imageMat <- rgb2Value(imageArray)
 
   ## Alternative implementation for some images
@@ -53,6 +45,42 @@ getFingerprint <- function(file, ...) {
 
   zeros <- isCross(x = sumImage, len = 3)
   diff(which(zeros))
+}
+
+get_reader <- function(file) {
+  readers <- list(
+    gz   = gz_reader,
+    png  = pkg("png",  "readPNG")  %||% pkg_reader_error("png"),
+    jpg  = pkg("jpeg", "readJPEG") %||% pkg_reader_error("jpeg"),
+    jpeg = pkg("jpeg", "readJPEG") %||% pkg_reader_error("jpeg"),
+    bmp  = createBMP(pkg("bmp", "read.bmp")) %||% pkg_reader_error("bmp")
+  )
+
+  file <- file[1]
+  ext <- file_ext(file)
+  type <- tolower(ext)
+
+  readers[[type]] %||% stop("unsupported file type: .", ext)
+}
+
+## Create a function that can read an image from a compressed file
+## Unfortunately it has to use temporary files, as readJPEG, etc.
+## cannot read from connections.
+##
+
+gz_reader <- function(source) {
+
+  ## get proper reader
+  ufile <- sub("\\.gz$", "", source)
+  reader <- get_reader(ufile)
+
+  ## create temp file
+  tmp <- tempfile(fileext = paste0(".", file_ext(ufile)))
+  on.exit(unlink(tmp), add = TRUE)
+  ungzip(source, tmp)
+
+  ## read from temp file
+  reader(tmp)
 }
 
 ## Get a function from a package, or NULL if the package is not
