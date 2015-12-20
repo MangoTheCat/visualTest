@@ -1,9 +1,13 @@
 
 #' Get Image Fingerprint
 #'
+#' TODO: details of the algorithms.
+#'
 #' @param file single character naming PNG, JPG or BMP file
 #'   from which to get fingerprint. It can also be a gzip compressed
 #'   file with extension \code{.gz}.
+#' @param algorithm hashing algorithm. Possible values:
+#'   \code{original}, \code{dcf}. See details below.
 #'
 #' @export
 #' @importFrom tools file_ext
@@ -14,15 +18,27 @@
 #'   system.file(package = "visualTest", "compare", "stest-00.jpg.gz")
 #' )
 
-getFingerprint <- function(file) {
+getFingerprint <- function(file, algorithm = c("original", "dcf")) {
 
   if (missing(file) || length(file) == 0) stop("file is missing")
   if (length(file) > 1) warning("only first value of file will be used")
 
-  reader <- get_reader(file)
+  algorithm <- match.arg(algorithm)
+
+  image <- get_reader(file)(file)
+
+  if (algorithm == "original") {
+    getFingerprintOriginal(image)
+
+  } else if (algorithm == "dcf") {
+    getFingerprintDCF(image)
+  }
+}
+
+getFingerprintOriginal <- function(image) {
 
   ## We drop the alpha channel, if present
-  imageArray <- reader(file)[ , , 1:3, drop = FALSE]
+  imageArray <- image[ , , 1:3, drop = FALSE]
   imageMat <- rgb2Value(imageArray)
 
   ## Alternative implementation for some images
@@ -44,6 +60,24 @@ getFingerprint <- function(file) {
 
   zeros <- isCross(x = sumImage, len = 3)
   diff(which(zeros))
+}
+
+getFingerprintDCF <- function(image) {
+
+  ## Resample image
+  image <- bilinearInterpolation(image * 255, c(64, 64))
+
+  ## Get luma value
+  image1 <- floor(image[,,1] * 0.299 + image[,,2] * 0.587 + image[,,3] * 0.114)
+
+  ## DCT for each row and column (apply transposes)
+  image_dct <- apply(apply(image1, 1, dct), 1, dct)
+
+  ## Extract the top 8x8 pixels
+  dct8x8 <- image_dct[1:8, 1:8]
+
+  ## Calculate the hash
+  logicalToHexa(dct8x8 > median(dct8x8))
 }
 
 get_reader <- function(file) {
