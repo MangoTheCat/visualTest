@@ -10,6 +10,6 @@ test_that("Fingerprint of a base R plot is similar across platforms", {
         pch = 21, bg = c("red", "green3", "blue")[unclass(iris$Species)])
   dev.off()
 
-  expect_true(isSimilar(tmp, "BA68E7B3948C8936"), threshold = 8)
+  expect_true(isSimilar(tmp, "BA68E7B3948C8936", threshold = 8))
 
 })
