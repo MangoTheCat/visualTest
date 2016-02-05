@@ -67,6 +67,7 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
   if (!is.character(file) || length(file) != 1) {
     stop("file should be a single character")
   }
+  if (!file.exists(file)) stop("file does not exist")
 
   if (is.numeric(fingerprint) ||
       (is.character(fingerprint) && length(fingerprint) == 1)) {
