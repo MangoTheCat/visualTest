@@ -2,18 +2,26 @@
 % Please edit documentation in R/showFingerprint.R
 \name{showFingerprint}
 \alias{showFingerprint}
-\title{Plot some fingerprints against each other}
+\title{Plot some fingerprints against each other
+This currently only works for fingerprints with the
+\sQuote{original} algorithm.}
 \usage{
-showFingerprint(...)
+showFingerprint(..., algorithm = "original")
 }
 \arguments{
 \item{...}{files to test}
+
+\item{algorithm}{The algorithm to use, see
+\code{\link{getFingerprint}}. Currently only the \sQuote{original}
+algorithm works.}
 }
 \value{
 list of fingerprint(s) invisibly.
 }
 \description{
 Plot some fingerprints against each other
+This currently only works for fingerprints with the
+\sQuote{original} algorithm.
 }
 \examples{
 sf <- system.file(package = "visualTest")

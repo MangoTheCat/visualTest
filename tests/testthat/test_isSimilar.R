@@ -34,6 +34,7 @@ test_that("isSimilar", {
     corr <- case$correct
     case$correct <- NULL
     case$fingerprint <- fingerprint
+    case$algorithm <- "original"
 
     result <- do.call(isSimilar, case)
     expect_equal(result, corr, info = paste(case$file, corr))
@@ -76,7 +77,12 @@ test_that("is cross-platform difference ignored?", {
     f2 <- system.file(package = packageName(), "compare", "windows", f)
     t <- thresholds[f]
     expect_true(
-      isSimilar(file = f1, fingerprint = f2, threshold = t),
+      isSimilar(
+        file = f1,
+        fingerprint = f2,
+        threshold = t,
+        algorithm = "original"
+      ),
       info = f
     )
   }

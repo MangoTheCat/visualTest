@@ -43,7 +43,7 @@ test_that("getFingerprint", {
     file <- system.file(package = "visualTest", "compare", case)
     expect_equal(
       as.integer(cases[[case]]),
-      getFingerprint(file = file),
+      unclass(getFingerprint(file = file, algorithm = "original")),
       info = case
     )
   }

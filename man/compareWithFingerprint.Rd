@@ -7,11 +7,14 @@
 compareWithFingerprint(test, fingerprint, threshold = 0.001, exact = FALSE)
 }
 \arguments{
-\item{test}{numeric vector}
+\item{test}{fingerprint}
 
-\item{fingerprint}{numeric vector}
+\item{fingerprint}{fingerprint}
 
-\item{threshold}{single numeric similarity parameter (default 1e-3)}
+\item{threshold}{single numeric similarity parameter,
+for the \code{original} algorithm it defaults to 1e-3.
+For the \code{dcf} method it is the number bits allowed to
+be different in the fingerprint (i.e. Hamming distance).}
 
 \item{exact}{single logical should fingerprints match exactly (default
 \code{FALSE})}

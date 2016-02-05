@@ -4,15 +4,18 @@
 \alias{getFingerprint}
 \title{Get Image Fingerprint}
 \usage{
-getFingerprint(file)
+getFingerprint(file, algorithm = c("dcf", "original"))
 }
 \arguments{
 \item{file}{single character naming PNG, JPG or BMP file
 from which to get fingerprint. It can also be a gzip compressed
 file with extension \code{.gz}.}
+
+\item{algorithm}{hashing algorithm. Possible values:
+\code{original}, \code{dcf}. See details below.}
 }
 \description{
-Get Image Fingerprint
+TODO: details of the algorithms.
 }
 \examples{
 getFingerprint(

@@ -9,11 +9,12 @@
 #' @title Is this Graphic a Match to this Fingerprint?
 #' @param file single character naming PNG or JPG file from which to get
 #'   fingerprint
-#' @param fingerprint numeric vector identifying file expected, or a single
-#'   character naming a file to fingerprint
+#' @param fingerprint fingerprint, or filename. Character scalars
+#'   without a dot in them and numeric vectors are taken as fingerprints.
 #' @param threshold single numeric similarity parameter (default 1e-3)
 #' @param exact single logical should fingerprints match exactly (default
-#'   \code{FALSE})
+#'   \code{FALSE}). Note that for the \code{original} algorithm, this
+#'   is not equivalent to using a zero threshold.
 #' @param ... additional arguments
 #'
 #' @export
@@ -69,7 +70,8 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
 
   if (is.numeric(fingerprint) ||
       (is.character(fingerprint) && length(fingerprint) == 1)) {
-    if (is.character(fingerprint) && length(fingerprint) == 1) {
+    if (is.character(fingerprint) && length(fingerprint) == 1 &&
+        grepl(".", fingerprint, fixed = TRUE)) {
       fingerprint <- getFingerprint(file = fingerprint, ...)
     }
 
@@ -90,9 +92,12 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
 
 #' Compare a test fingerprint with a known fingerprint
 #'
-#' @param test numeric vector
-#' @param fingerprint numeric vector
-#' @param threshold single numeric similarity parameter (default 1e-3)
+#' @param test fingerprint
+#' @param fingerprint fingerprint
+#' @param threshold single numeric similarity parameter,
+#'   for the \code{original} algorithm it defaults to 1e-3.
+#'   For the \code{dcf} method it is the number bits allowed to
+#'   be different in the fingerprint (i.e. Hamming distance).
 #' @param exact single logical should fingerprints match exactly (default
 #'   \code{FALSE})
 #' @return single logical
@@ -113,20 +118,34 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
 compareWithFingerprint <- function(test, fingerprint, threshold = 1e-3,
                                    exact = FALSE) {
 
-  result <- FALSE
+  if (is.numeric(test) + is.numeric(fingerprint) == 1) {
+    stop("Cannot compare fingerprints from different algorithms")
+  }
 
+  if (is.numeric(test)) {
+    compareWithFingerprintOriginal(test, fingerprint, threshold, exact)
+
+  } else {
+    compareWithFingerprintDCF(test, fingerprint, threshold, exact)
+  }
+}
+
+compareWithFingerprintOriginal <- function(test, fingerprint, threshold, exact) {
   if (exact) {
     if (length(test) == length(fingerprint)) {
-      if (all(test == fingerprint)) {
-        result <- TRUE
-      }
+      if (all(test == fingerprint)) return(TRUE)
     }
 
   } else {
     if (all(abs(fivenum(test) - fivenum(fingerprint)) <= abs(threshold))) {
-      result <- TRUE
+      return(TRUE)
     }
   }
 
-  result
+  FALSE
+}
+
+compareWithFingerprintDCF <- function(test, fingerprint, threshold, exact) {
+  if (exact) threshold <- 0
+  hamming_distance(test, fingerprint) <= threshold
 }

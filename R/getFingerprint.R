@@ -18,7 +18,7 @@
 #'   system.file(package = "visualTest", "compare", "stest-00.jpg.gz")
 #' )
 
-getFingerprint <- function(file, algorithm = c("original", "dcf")) {
+getFingerprint <- function(file, algorithm = c("dcf", "original")) {
 
   if (missing(file) || length(file) == 0) stop("file is missing")
   if (length(file) > 1) warning("only first value of file will be used")
@@ -59,6 +59,7 @@ getFingerprintOriginal <- function(image) {
   sumImage <- apply(Im(ftImage), MARGIN = 1, sum)
 
   zeros <- isCross(x = sumImage, len = 3)
+
   diff(which(zeros))
 }
 

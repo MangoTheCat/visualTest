@@ -10,8 +10,8 @@ isSimilar(file, fingerprint, threshold = 0.001, exact = FALSE, ...)
 \item{file}{single character naming PNG or JPG file from which to get
 fingerprint}
 
-\item{fingerprint}{numeric vector identifying file expected, or a single
-character naming a file to fingerprint}
+\item{fingerprint}{fingerprint, or filename. Character scalars
+without a dot in them and numeric vectors are taken as fingerprints.}
 
 \item{threshold}{single numeric similarity parameter (default 1e-3)}
 

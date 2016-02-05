@@ -1,7 +1,12 @@
 
 #' Plot some fingerprints against each other
+#' This currently only works for fingerprints with the
+#' \sQuote{original} algorithm.
 #'
 #' @param ... files to test
+#' @param algorithm The algorithm to use, see
+#'   \code{\link{getFingerprint}}. Currently only the \sQuote{original}
+#'   algorithm works.
 #' @return list of fingerprint(s) invisibly.
 #'
 #' @export
@@ -16,12 +21,14 @@
 #'   file.path(sf, "compare", "unix", eg)
 #' )
 
-showFingerprint <- function(...) {
+showFingerprint <- function(..., algorithm = "original") {
+
+  algorithm <- match.arg(algorithm)
 
   files <- list(...)
   if (length(files) == 0) stop("No files specified")
 
-  fingers <- lapply(files, getFingerprint)
+  fingers <- lapply(files, getFingerprint, algorithm = algorithm)
 
   rng <- range(unlist(fingers), na.rm = TRUE)
   lenf <- vapply(fingers, length, 1L)
