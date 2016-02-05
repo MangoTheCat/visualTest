@@ -112,7 +112,33 @@ test_that("isSimilar error handling", {
   )
 
   expect_error(
-    isSimilar(file = "foo.png", fingerprint = FALSE),
+    isSimilar(file = tempfile(), fingerprint = 1:10),
+    "file does not exist"
+  )
+
+  tmp <- tempfile(fileext = ".png")
+  cat("", file = tmp)
+  on.exit(unlink(tmp), add = TRUE)
+
+  expect_error(
+    isSimilar(file = tmp, fingerprint = FALSE),
     "fingerprint should be a numeric vector or a single character"
+  )
+
+  tmp <- tempfile(fileext = ".png")
+  on.exit(unlink(tmp), add = TRUE)
+
+  png(tmp)
+  pairs(iris[1:4], main = "Anderson's Iris Data -- 3 species",
+        pch = 21, bg = c("red", "green3", "blue")[unclass(iris$Species)])
+  dev.off()
+
+  expect_error(
+    isSimilar(
+      tmp,
+      c(26, 27, 26, 25, 4, 5, 22, 8, 3, 9, 6, 6, 3, 3,
+        3, 3, 3, 4, 8, 9, 3, 6, 24, 3, 6, 23, 26, 27, 24, 24)
+    ),
+    "Cannot compare fingerprints from different algorithms"
   )
 })
