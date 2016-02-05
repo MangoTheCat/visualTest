@@ -82,6 +82,8 @@ getFingerprintOriginal <- function(image) {
   diff(which(zeros))
 }
 
+#' @importFrom stats median
+
 getFingerprintDCT <- function(image) {
 
   ## Resample image
