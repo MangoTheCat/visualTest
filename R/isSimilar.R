@@ -96,7 +96,7 @@ isSimilar <- function(file, fingerprint, threshold = 1e-3,
 #' @param fingerprint fingerprint
 #' @param threshold single numeric similarity parameter,
 #'   for the \code{original} algorithm it defaults to 1e-3.
-#'   For the \code{dcf} method it is the number bits allowed to
+#'   For the \code{dct} method it is the number bits allowed to
 #'   be different in the fingerprint (i.e. Hamming distance).
 #' @param exact single logical should fingerprints match exactly (default
 #'   \code{FALSE})
@@ -126,7 +126,7 @@ compareWithFingerprint <- function(test, fingerprint, threshold = 1e-3,
     compareWithFingerprintOriginal(test, fingerprint, threshold, exact)
 
   } else {
-    compareWithFingerprintDCF(test, fingerprint, threshold, exact)
+    compareWithFingerprintDCT(test, fingerprint, threshold, exact)
   }
 }
 
@@ -145,7 +145,7 @@ compareWithFingerprintOriginal <- function(test, fingerprint, threshold, exact) 
   FALSE
 }
 
-compareWithFingerprintDCF <- function(test, fingerprint, threshold, exact) {
+compareWithFingerprintDCT <- function(test, fingerprint, threshold, exact) {
   if (exact) threshold <- 0
   hamming_distance(test, fingerprint) <= threshold
 }

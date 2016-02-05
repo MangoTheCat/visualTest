@@ -1,6 +1,6 @@
 
 #' Plot some fingerprints against each other
-#' This currently only works for fingerprints with the
+#' This currently only works for fingerprints from the
 #' \sQuote{original} algorithm.
 #'
 #' @param ... files to test

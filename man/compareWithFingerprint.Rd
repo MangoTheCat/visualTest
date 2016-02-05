@@ -13,7 +13,7 @@ compareWithFingerprint(test, fingerprint, threshold = 0.001, exact = FALSE)
 
 \item{threshold}{single numeric similarity parameter,
 for the \code{original} algorithm it defaults to 1e-3.
-For the \code{dcf} method it is the number bits allowed to
+For the \code{dct} method it is the number bits allowed to
 be different in the fingerprint (i.e. Hamming distance).}
 
 \item{exact}{single logical should fingerprints match exactly (default

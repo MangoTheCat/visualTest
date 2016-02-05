@@ -3,7 +3,7 @@
 \name{showFingerprint}
 \alias{showFingerprint}
 \title{Plot some fingerprints against each other
-This currently only works for fingerprints with the
+This currently only works for fingerprints from the
 \sQuote{original} algorithm.}
 \usage{
 showFingerprint(..., algorithm = "original")
@@ -20,7 +20,7 @@ list of fingerprint(s) invisibly.
 }
 \description{
 Plot some fingerprints against each other
-This currently only works for fingerprints with the
+This currently only works for fingerprints from the
 \sQuote{original} algorithm.
 }
 \examples{

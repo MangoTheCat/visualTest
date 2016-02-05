@@ -4,18 +4,37 @@
 \alias{getFingerprint}
 \title{Get Image Fingerprint}
 \usage{
-getFingerprint(file, algorithm = c("dcf", "original"))
+getFingerprint(file, algorithm = c("dct", "original"))
 }
 \arguments{
 \item{file}{single character naming PNG, JPG or BMP file
 from which to get fingerprint. It can also be a gzip compressed
 file with extension \code{.gz}.}
 
-\item{algorithm}{hashing algorithm. Possible values:
-\code{original}, \code{dcf}. See details below.}
+\item{algorithm}{fingerprint algorithm. Possible values:
+\code{original}, \code{dct}. See details below.}
 }
 \description{
-TODO: details of the algorithms.
+Get a fingerprint of an image, that does not depend on the
+fine details of the image. The fingerprint can be used to
+compare images generated on different machines, platforms, etc.
+It supports PNG, JPG and BMP images currently.
+}
+\details{
+It implements two algorithms. The default algorithm uses a
+Discrete Cosine Transform (DCT). It first resizes both images
+into 64x64 size to speed up further calculations. Then it
+calculates the DCT of both images, takes the top-left 8x8
+cells of the DCT, and calculate the difference to the median
+DCT for both. The result is a 64-bit string represented as
+a hexadecimal string. The algorithm is similar to and inspired
+by phash (\url{http://www.phash.org/}) and imagehash
+(\url{https://github.com/jenssegers/imagehash}).
+
+The \code{original} algorithm calculates the Fast Discrete
+Fourier Transform of both images, columnwise. Then it takes
+the imaginary parts of the results, sums them up rowwise,
+and checks when the sums switch sign.
 }
 \examples{
 getFingerprint(

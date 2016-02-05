@@ -16,7 +16,8 @@ without a dot in them and numeric vectors are taken as fingerprints.}
 \item{threshold}{single numeric similarity parameter (default 1e-3)}
 
 \item{exact}{single logical should fingerprints match exactly (default
-\code{FALSE})}
+\code{FALSE}). Note that for the \code{original} algorithm, this
+is not equivalent to using a zero threshold.}
 
 \item{...}{additional arguments}
 }
