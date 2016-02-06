@@ -1,6 +1,14 @@
 <!-- -*- mode: markdown -*- -->
 
-
+```{r, setup, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  tidy = FALSE,
+  error = FALSE,
+  fig.path = "inst/",
+  fig.width = 8,
+  fig.height = 8)
+```
 
 # visualTest
 
@@ -31,33 +39,16 @@ similar fingerprints.
 
 ![](/inst/mango.png) ![](/inst/mango2.png)
 
-
-```r
+```{r}
 library(visualTest)
 getFingerprint("mango.png")
-```
-
-```
-#> [1] "FAB5894A8C963369"
-```
-
-```r
 getFingerprint("mango2.png")
-```
-
-```
-#> [1] "FAB5894A8C963369"
 ```
 
 ![](/inst/cat.jpg)
 
-
-```r
+```{r}
 getFingerprint("cat.jpg")
-```
-
-```
-#> [1] "FA85C13A9865BCCA"
 ```
 
 To use `visualTest` in your test cases, you can store the fingerprint
@@ -69,28 +60,17 @@ you might need to allow some bits to change when you compare the image
 to the fingerprint. The default fingerprint is 64 bits long, and
 here we allow a mismatch of 8 bits:
 
-
-```r
+```{r results = "hide"}
 tmp <- tempfile(fileext = ".png")
 
 pairs(iris[1:4], main = "Anderson's Iris Data -- 3 species",
       pch = 21, bg = c("red", "green3", "blue")[unclass(iris$Species)])
-```
-
-![plot of chunk unnamed-chunk-3](inst/unnamed-chunk-3-1.png) 
-
-```r
 dev.copy(png, tmp)
 dev.off()
 ```
 
-
-```r
+```{r}
 isSimilar(tmp, "BA68E7B3948C8936", threshold = 8)
-```
-
-```
-#> [1] TRUE
 ```
 
 ## License
